@@ -14,6 +14,42 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        var wManager=applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+
+        var status=wManager.wifiState
+
+        if (status==0||status==1){
+
+            switch1.isChecked==false
+        }else if (status==2||status==3){
+
+            switch1.isChecked=true
+        }
+
+        switch1.setOnCheckedChangeListener { buttonView, isChecked ->
+
+            wManager.setWifiEnabled(isChecked)
+
+            var vib = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            vib.vibrate(10000)
+        }
+
+        gwd.setOnClickListener {
+
+            var slist=wManager.scanResults
+
+            var templist:MutableList<String> = mutableListOf()
+
+            for(device in slist){
+
+                templist.add(device.SSID+"\n"+device.frequency)
+
+            }
+
+            var myAdapter=ArrayAdapter<String>(this@MainActivity,android.R.layout.simple_list_item_1,templist)
+
+
+        }
 
 
     }
