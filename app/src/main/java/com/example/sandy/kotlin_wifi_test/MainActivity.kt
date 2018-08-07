@@ -1,11 +1,15 @@
 package com.example.sandy.kotlin_wifi_test
 
 import android.content.Context
+import android.net.wifi.ScanResult
+import android.net.wifi.WifiConfiguration
 import android.net.wifi.WifiManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Vibrator
+import android.util.Log
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -36,7 +40,9 @@ class MainActivity : AppCompatActivity() {
 
         gwd.setOnClickListener {
 
-            var slist=wManager.scanResults
+            Toast.makeText(this,"entered",Toast.LENGTH_LONG).show()
+
+            var slist:List<ScanResult> = wManager.scanResults
 
             var templist:MutableList<String> = mutableListOf()
 
@@ -48,8 +54,22 @@ class MainActivity : AppCompatActivity() {
 
             var myAdapter=ArrayAdapter<String>(this@MainActivity,android.R.layout.simple_list_item_1,templist)
 
+            lv1.adapter=myAdapter
+
+            Log.i("scan","check")
 
         }
+
+        gpd.setOnClickListener {
+            var list:List<WifiConfiguration> =    wManager.configuredNetworks
+            var temp_list : MutableList<String>   = mutableListOf()
+            for(device in list){
+                temp_list.add(device.SSID+"\n"+device.status)
+            }
+            var myadapter = ArrayAdapter<String>(this@MainActivity, android.R.layout.simple_list_item_1, temp_list)
+            lv1.adapter = myadapter
+        }
+
 
 
     }
