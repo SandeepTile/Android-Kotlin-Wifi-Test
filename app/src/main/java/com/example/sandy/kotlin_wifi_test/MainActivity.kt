@@ -41,6 +41,11 @@ class MainActivity : AppCompatActivity() {
 
         gwd.setOnClickListener {
 
+            /*
+                set permission manually(location) otherwise this function is not working properly
+            */
+
+
            // Toast.makeText(this,"entered",Toast.LENGTH_LONG).show()
 
             var slist:List<ScanResult> = wManager.scanResults
