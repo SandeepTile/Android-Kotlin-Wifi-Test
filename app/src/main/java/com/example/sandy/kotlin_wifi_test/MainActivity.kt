@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         if (status==0||status==1){
 
             switch1.isChecked==false
+
         }else if (status==2||status==3){
 
             switch1.isChecked=true
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
         gwd.setOnClickListener {
 
-            Toast.makeText(this,"entered",Toast.LENGTH_LONG).show()
+           // Toast.makeText(this,"entered",Toast.LENGTH_LONG).show()
 
             var slist:List<ScanResult> = wManager.scanResults
 
